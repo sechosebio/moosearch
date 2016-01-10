@@ -116,7 +116,10 @@ public class App{
 			   curso.setId((String)cursoJson.get("id"));
 			   curso.setNombre((String)cursoJson.get("name"));
 			   //curso.setTipo((String)cursoJson.get("slug"));
+			   curso.setUrl((String) "https://www.coursera.org/learn/"+cursoJson.get("slug"));
 			   curso.setFoto((String)cursoJson.get("photoUrl"));
+			   curso.setDescripcion((String)cursoJson.get("description"));
+			   curso.setPagina("coursera");
 			   tipo = (JSONArray) cursoJson.get("domainTypes");
 			   //idioma = (JSONObject) cursoJson.get("primaryLanguages");
 			   curso.setTipo((String) ((JSONObject) tipo.get(0)).get("domainId"));
@@ -150,7 +153,10 @@ public class App{
 				   curso.setId((String)cursoJson.get("key"));
 				   curso.setNombre((String)cursoJson.get("title"));
 				   curso.setDescripcion((String)cursoJson.get("project_description"));
-				   
+				   curso.setPagina("udacity");
+				   curso.setUrl((String)cursoJson.get("homepage"));
+				   curso.setFoto((String)cursoJson.get("image"));
+				  
 				   cursos.add(curso);
 				   
 			   }

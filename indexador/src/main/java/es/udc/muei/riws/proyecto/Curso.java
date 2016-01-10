@@ -14,6 +14,10 @@ public class Curso {
 	
 	private String idioma;
 	
+	private String pagina;
+	
+	private String url;
+	
 	public String getId() {
 		return id;
 	}
@@ -60,5 +64,21 @@ public class Curso {
 
 	public void setIdioma(String idioma) {
 		this.idioma = idioma;
+	}
+
+	public String getPagina() {
+		return pagina;
+	}
+
+	public void setPagina(String pagina) {
+		this.pagina = pagina;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 }

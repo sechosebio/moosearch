@@ -37,6 +37,8 @@ public class SolrServer {
 				cursoIndexado.addField("descripcion", curso.getDescripcion());
 				cursoIndexado.addField("tipo", curso.getTipo());
 				cursoIndexado.addField("foto", curso.getFoto());
+				cursoIndexado.addField("pagina", curso.getPagina());
+				cursoIndexado.addField("url", curso.getUrl());
 				//cursoIndexado.addField("idioma", curso.getIdioma());
 				inputs.add(cursoIndexado);
 				i++;
