@@ -316,7 +316,7 @@
     <field name="pagina" type="text_general" stored="true" indexed="true"/>
     <field name="url" type="text_general" stored="true" indexed="false"/>
     <field name="fechaInicio" type="text_general" stored="true" indexed="true"/>
-    <field name="idiomas" type="text_general" stored="true" indexed="true" multiValued="true"/>
+    <field name="idioma" type="text_general" stored="true" indexed="true"/>
 
     <!-- core fields -->
     <field name="batchId" type="string" stored="true" indexed="false"/>

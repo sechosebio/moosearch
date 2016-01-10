@@ -1,5 +1,8 @@
 package es.udc.muei.riws.proyecto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Curso {
 	
 	private String id;
@@ -17,6 +20,14 @@ public class Curso {
 	private String pagina;
 	
 	private String url;
+	
+	private String fechaInicio;
+	
+	private List<String> idiomas;
+	
+	public Curso(){
+		idiomas = new ArrayList<String>();
+	}
 	
 	public String getId() {
 		return id;
@@ -80,5 +91,21 @@ public class Curso {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(String fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public List<String> getIdiomas() {
+		return idiomas;
+	}
+
+	public void setIdiomas(List<String> idiomas) {
+		this.idiomas = idiomas;
 	}
 }

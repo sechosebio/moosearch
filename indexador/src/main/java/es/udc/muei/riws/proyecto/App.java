@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,7 +27,8 @@ public class App{
    {
         App app = new App();
         app.indexar();
-        //app.buscarPorId("ud837");
+//        app.buscarPorId("ud837");
+//        app.buscarSimilares("ud837");
         
    }
    
@@ -40,6 +43,24 @@ public class App{
 				System.out.println("tipo = " + obj.get("tipo"));
 				
 			}
+		} catch (SolrServerException e) {
+			System.out.println("(SolrServerException)Error al "
+					+ "realizar la busqueda por id: " + e.getMessage());
+		}
+   }
+   
+   private void buscarSimilares(String id){
+	   SolrServer solr = new SolrServer();
+	   try {
+			SolrDocumentList resultados = solr.buscarSimilares(id);
+			for(SolrDocument obj : resultados){
+				System.out.println("id = " + obj.get("id"));
+				System.out.println("nombre = " + obj.get("nombre"));
+				System.out.println("descripcion = " + obj.get("descripcion"));
+				System.out.println("tipo = " + obj.get("tipo"));
+				
+			}
+			System.out.println("numero total: " + resultados.size());
 		} catch (SolrServerException e) {
 			System.out.println("(SolrServerException)Error al "
 					+ "realizar la busqueda por id: " + e.getMessage());
@@ -99,7 +120,7 @@ public class App{
 	
    private List<Curso> parsearContenidoCoursera(){
 	  //String https_url = "https://api.coursera.org/api/courses.v1";
-	   String https_url = "https://api.coursera.org/api/courses.v1/?&fields=photoUrl,domainTypes,primaryLanguages,description";
+	   String https_url = "https://api.coursera.org/api/courses.v1/?&fields=photoUrl,domainTypes,primaryLanguages,description,startDate";
       List<Curso> cursos = new ArrayList<Curso>();
       try {
 			
@@ -107,7 +128,6 @@ public class App{
 	   
 	     JSONArray elements = (JSONArray) jsonObject.get("elements");
 	     JSONArray tipo;
-	     JSONObject idioma;
 	     if(elements != null){
 		   Iterator<JSONObject> iterator = elements.iterator();
 		   while (iterator.hasNext()) {
@@ -120,8 +140,20 @@ public class App{
 			   curso.setFoto((String)cursoJson.get("photoUrl"));
 			   curso.setDescripcion((String)cursoJson.get("description"));
 			   curso.setPagina("coursera");
+			   Long startDate = (Long)cursoJson.get("startDate");
+			   if(startDate != null){
+				   Date date = new Date(startDate);
+				   SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				   curso.setFechaInicio(sdf.format(date));
+			   }
 			   tipo = (JSONArray) cursoJson.get("domainTypes");
 			   //idioma = (JSONObject) cursoJson.get("primaryLanguages");
+			   JSONArray idiomas = (JSONArray) cursoJson.get("primaryLanguages");
+			   Iterator<String> it = idiomas.iterator();
+			   while (it.hasNext()) {
+				   String idioma = (String)it.next();
+				   curso.getIdiomas().add(idioma);
+			   }
 			   curso.setTipo((String) ((JSONObject) tipo.get(0)).get("domainId"));
 			   cursos.add(curso);
 	

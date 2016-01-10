@@ -837,7 +837,7 @@
 <!-- la frecuencia con la que se ignoran palabras que no se producen en al menos esta cantidad de documentos -->
 	<str name="mlt.mindf">15</str>
 <!-- longitud de palabra mínima por debajo de la cual se ignoran palabras -->
-	<str name="mlt.minwl">3</str>
+	<str name="mlt.minwl">5</str>
 	<str name="mlt.boost">true</str>
      </lst>
 </requestHandler>
