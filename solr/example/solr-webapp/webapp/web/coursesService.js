@@ -13,6 +13,14 @@ app.factory('coursesService', function ($http, $rootScope) {
             return $http.get(url_base+q+url_end).then(function(result){
                 return result.data;
             });
+        },
+        related: function(id){
+            var url_base = "http://localhost:8983/solr/multi?q=id%3A";
+            var url_end=  "&wt=json&indent=true&rows=4";
+            var url = url_base+id+url_end;
+            return $http.get(url).then(function(result){
+                return result.data;
+            })
         }
     }
 

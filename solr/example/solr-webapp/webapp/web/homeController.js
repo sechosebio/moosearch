@@ -100,16 +100,30 @@ app.controller('homeController',function($scope,$uibModal,$log,$http,coursesServ
 
 });
 
-app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,item) {
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance,coursesService,item) {
 
     $scope.course = item;
 
-  $scope.ok = function () {
-    $uibModalInstance.close($scope.course);
-  };
+    coursesService.related(item.id).then(function(data){
 
-  $scope.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-};
+        $scope.relatedCourses = data.response.docs;
+    });
+
+    $scope.ok = function () {
+        $uibModalInstance.close($scope.course);
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+
+    $scope.change = function(related){
+        $scope.course = related;
+        coursesService.related(related.id).then(function(data){
+
+            $scope.relatedCourses = data.response.docs;
+        });
+
+    }
 
 });

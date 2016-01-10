@@ -53,18 +53,25 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-10">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox1" ng-model="checkBoxCoursera" ng-true-value="'coursera'"> Coursera
-                            </label>
-                            <label class="checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox2" ng-model="checkBoxUdacity"  ng-true-value="'udacity'"> Udacity
-                            </label>
-                        </div>
+                            <div class="col-sm-10 col-lg-2">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="inlineCheckbox1" ng-model="checkBoxCoursera" ng-true-value="'coursera'"> Coursera
+                                </label>
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" id="inlineCheckbox2" ng-model="checkBoxUdacity"  ng-true-value="'udacity'"> Udacity
+                                </label>
+                            </div>
+                            <div class="col-sm-5 col-lg-2">
+                                <label for="language">Language</label>
+                                <select name="language" id="language" ng-model="langauge" class="form-control input-sm">
+                                    <option value='en'>English</option>
+                                    <option value='es'>Spanish</option>
+                                </select>
+                            </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-10">
-                          <button type="submit" class="btn btn-default" ng-click="search()">Search</button>
+                        <div class="col-md-offset-5 col-md-10">
+                          <button type="submit" class="btn btn-primary" ng-click="search()">Search</button>
                         </div>
                   </div>
                 </form>
@@ -78,8 +85,7 @@
                     <img ng-src={{course.foto}} alt="...">
                     <div class="caption">
                         <h3>{{course.nombre}}</h3>
-                        <p>...</p>
-                        <p><a href="#" class="btn btn-primary" role="button" data-ng-click="open(course)">More</a></p>
+                        <p><a href="#" class="btn btn-primary" role="button" data-ng-click="open(course)">Read More</a></p>
                     </div>
                 </div>
             </div>
@@ -88,18 +94,33 @@
     </div>
 
     <script type="text/ng-template" id="myModalContent.html">
-    <div class="modal-header">
-    <h3 class="modal-title">{{course.nombre}}</h3>
-    </div>
-    <div class="modal-body">
-    <p>{{course.tipo}}</p>
-    <p>{{course.descripcion}}</p>
-
-    </div>
-    <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-    </div>
+        <div class="modal-header">
+            <h3 class="modal-title">{{course.nombre}}</h3>
+        </div>
+        <div class="modal-body">
+            <p>Category: {{course.tipo}}</p>
+            <h5>Description:</h5>
+            <p>{{course.descripcion}}</p>
+            <a ng-href="{{course.url}}" type="button" class="btn btn-info">
+                Visit the course main page
+            </a>
+            <hr>
+            <h4>Related courses</h4>
+            <div class="row">
+              <div class="col-xs-6 col-md-3" ng-repeat="related in relatedCourses">
+              <div class="thumbnail">
+                <img ng-src="{{related.foto}}" alt="...">
+                <div class="caption">
+                  <h4>{{related.nombre}}</h4>
+                  <button type="submit" class="btn btn-btn-info" ng-click="change(related)">More info</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
     </script>
 </body>
 
