@@ -826,6 +826,17 @@
        of SearchComponents (see below) and supports distributed
        queries across multiple shards
     -->
+ <requestHandler name="/multi" class="solr.MoreLikeThisHandler">
+    <!-- default values for query parameters can be specified, these
+         will be overridden by parameters in the request
+      -->
+     <lst name="defaults">
+       <str name="mlt.fl">descripcion</str>
+<str name="mlt.mintf">1</str>
+<str name="mlt.mindf">2</str>
+<str name="mlt.boost">true</str>
+     </lst>
+</requestHandler>
   <requestHandler name="/select" class="solr.SearchHandler">
     <!-- default values for query parameters can be specified, these
          will be overridden by parameters in the request
