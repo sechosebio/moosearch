@@ -49,8 +49,9 @@ public class SolrServer {
 				//cursoIndexado.addField("idioma", curso.getIdioma());
 				inputs.add(cursoIndexado);
 				i++;
-				System.out.println(i);
+				
 			}
+			System.out.println("Se han idexado " + i + " cursos");
 			server.add(inputs); 
 			server.commit();
 	 
