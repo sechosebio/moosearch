@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>es.udc.muei.riws</groupId>
-  <artifactId>proyecto</artifactId>
+  <artifactId>indexador</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
