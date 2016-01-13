@@ -27,9 +27,6 @@ public class App{
    {
         App app = new App();
         app.indexar();
-//        app.buscarPorId("ud837");
-//        app.buscarSimilares("ud837");
-        
    }
    
    private void buscarPorId(String id){
@@ -49,37 +46,11 @@ public class App{
 		}
    }
    
-   private void buscarSimilares(String id){
-	   SolrServer solr = new SolrServer();
-	   try {
-			SolrDocumentList resultados = solr.buscarSimilares(id);
-			for(SolrDocument obj : resultados){
-				System.out.println("id = " + obj.get("id"));
-				System.out.println("nombre = " + obj.get("nombre"));
-				System.out.println("descripcion = " + obj.get("descripcion"));
-				System.out.println("tipo = " + obj.get("tipo"));
-				
-			}
-			System.out.println("numero total: " + resultados.size());
-		} catch (SolrServerException e) {
-			System.out.println("(SolrServerException)Error al "
-					+ "realizar la busqueda por id: " + e.getMessage());
-		}
-   }
-	
    private void indexar(){
 
 	   List<Curso> cursos = parsearContenidoCoursera();
 	   cursos.addAll(parsearContenidoUdacity());
 	     
-//	   List<Curso> cursos = new ArrayList<Curso>();
-//	   Curso cursoPrueba = new Curso();
-//	   cursoPrueba.setDescripcion("descripcion");
-//	   cursoPrueba.setId("id");
-//	   cursoPrueba.setNombre("nombre");
-//	   cursoPrueba.setTipo("tipo");
-//	   cursos.add(cursoPrueba);
-	   
 	   SolrServer solr = new SolrServer();
 	   solr.indexarProductos(cursos);
    }
