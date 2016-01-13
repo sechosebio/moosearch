@@ -66,14 +66,15 @@ app.controller('homeController',function($scope,$uibModal,$log,$http,coursesServ
 
     function validarTexto(t){
         //separamos en array
-        var aux="descripcion:("
+        var aux="descripcion:(";
+        var aux_nombre ="nombre:(";
         var primera = t[0];
         var ultima = t.substr(t.length-1);
         var res = t.split(" ");
         var text = "";
         if(primera=='"'&&ultima=='"'){
             var a = t.replace(" ","+");
-            text = "descripcion:"+a;
+            text = "descripcion:"+a+" OR nombre:"+a;
             return text;
         }else{
             if(res.length>1){
@@ -84,9 +85,11 @@ app.controller('homeController',function($scope,$uibModal,$log,$http,coursesServ
                 var p = text.lastIndexOf("+OR+");
                 var sub = text.substr(0, p);
                 aux+=sub+")";
+                aux_nombre+=sub+")";
+                aux+=" OR "+aux_nombre;
                 return aux;
             }else{
-                text = "descripcion:"+res[0];
+                text = "descripcion:"+res[0]+" OR nombre:"+res[0];
                 return text;
 
             }
@@ -127,9 +130,9 @@ app.controller('homeController',function($scope,$uibModal,$log,$http,coursesServ
             crearQuery(vacio);
         }
 
-        console.log(query);
+        //console.log(query);
         url=url+query;
-        //console.log(url);
+        console.log(url);
         return $http.get(url).then(function(result){
             $scope.courses = result.data.response.docs;
             query = null;
