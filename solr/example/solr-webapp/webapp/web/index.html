@@ -42,36 +42,41 @@
             <div class="panel-body">
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <div class="col-sm-12">
-                            <input type="text" ng-model="selectedCourse" placeholder="Write a title, a keyword..."
-                             uib-typeahead="course as course.nombre for course in getCourses($viewValue) |limitTo:5"
-                             typeahead-loading="loadingLocations" typeahead-no-results="noResults" typeahead-min-length=2 class="form-control">
-                            <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
-                            <div ng-show="noResults">
-                              <i class="glyphicon glyphicon-remove"></i> No Results Found
-                            </div>
+                        <div class="col-sm-10 col-lg-2 col-md-offset-5">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox1" ng-model="checkBoxCoursera" ng-true-value="'coursera'"> Coursera
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="inlineCheckbox2" ng-model="checkBoxUdacity"  ng-true-value="'udacity'"> Udacity
+                            </label>
                         </div>
                     </div>
                     <div class="form-group">
-                            <div class="col-sm-10 col-lg-2">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" id="inlineCheckbox1" ng-model="checkBoxCoursera" ng-true-value="'coursera'"> Coursera
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" id="inlineCheckbox2" ng-model="checkBoxUdacity"  ng-true-value="'udacity'"> Udacity
-                                </label>
-                            </div>
-                            <div class="col-sm-5 col-lg-2">
-                                <label for="language">Language</label>
-                                <select name="language" id="language" ng-model="langauge" class="form-control input-sm">
-                                    <option value='en'>English</option>
-                                    <option value='es'>Spanish</option>
-                                </select>
-                            </div>
+                        <div class="col-sm-5 col-lg-2">
+                            <a href="#" data-ng-click="openHowTo()">How to search?</a>
+                        </div>
+                        <div class="col-sm-5 col-lg-2 col-md-offset-2">
+                            <label for="language">Language</label>
+                            <select name="language" id="language" ng-model="language" class="form-control input-sm">
+                                <option value='en'>English</option>
+                                <option value='es'>Spanish</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-5 col-lg-2">
+                            <label for="category">Category</label>
+                            <select name="category" id="category" ng-model="category" class="form-control input-sm">
+                                <option ng-repeat="option in avaliableCategories" value="{{option.tipo}}">{{option.tipo}}</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-offset-5 col-md-10">
-                          <button type="submit" class="btn btn-primary" ng-click="search()">Search</button>
+                        <div class="col-sm-12">
+                            <input type="text" ng-model="text" placeholder="Write a title, a keyword..." class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                          <button type="submit" class="btn btn-primary btn btn-block" ng-click="search()">Search</button>
                         </div>
                   </div>
                 </form>
@@ -98,11 +103,14 @@
             <h3 class="modal-title">{{course.nombre}}</h3>
         </div>
         <div class="modal-body">
-            <p>Category: {{course.tipo}}</p>
+            <h4>From: {{course.pagina}}</h4>
+            <h5>Category:</h5>
+            <p>{{course.tipo}}</p>
+
             <h5>Description:</h5>
             <p>{{course.descripcion}}</p>
             <a ng-href="{{course.url}}" type="button" class="btn btn-info">
-                Visit the course main page
+                Visit the course main page (External)
             </a>
             <hr>
             <h4>Related courses</h4>
@@ -112,11 +120,26 @@
                 <img ng-src="{{related.foto}}" alt="...">
                 <div class="caption">
                   <h4>{{related.nombre}}</h4>
-                  <button type="submit" class="btn btn-btn-info" ng-click="change(related)">More info</button>
+                  <button type="submit" class="btn btn-info" ng-click="change(related)">More info</button>
                 </div>
               </div>
             </div>
         </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+    <script type="text/ng-template" id="myModalContentHowTo.html">
+        <div class="modal-header">
+            <h3 class="modal-title">How to Search?</h3>
+        </div>
+        <div class="modal-body">
+            <p class="bg-info">You can search writing words like <samp>Android programming</samp> and the searcher will search courses
+            with this words in the description<p>
+            <p class="bg-info">But you can search for courses with exactly this two words writing <samp>"Android programming"</samp>
+            </p>
+
         <div class="modal-footer">
             <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
             <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
